@@ -1,0 +1,2 @@
+plink --bfile Als_Methy_impute --extract snp.keep.txt --make-bed --out Als_Methy_impute_update
+plink --bfile Als_Methy_impute_update --score score.txt --q-score-range p.txt score.txt 1 4 --out Als_Methy_impute_update
