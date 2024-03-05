@@ -9,7 +9,7 @@ in the PUTH-ALS cohort (Peking University Third Hospital ALS cohort).
 
 
 *** Second, we conducted an external validation of these DMPs and 5 biomarkers based on ALS postmortem expression profiles from the NYGC-ALS cohort 
-(coordinated by the New York Genomic Center; Access link：https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE153960；Access ID：GSE153960).
+(coordinated by the New York Genomic Center; Access link:https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE153960; Access ID：GSE153960).
     
     reference file "3-gene exp.R","3-pvalue-corplot.R".
 
@@ -18,7 +18,7 @@ in the PUTH-ALS cohort (Peking University Third Hospital ALS cohort).
     
     reference file "4-survival.R"
 
-*** Fourth, We identified a 27-loci signature using machine learning methods, and calculated the methylation risk score for each individual in the 
+*** Fourth, we identified a 27-loci signature using machine learning methods, and calculated the methylation risk score for each individual in the 
 PUTH-ALS cohort. Considering the possible interaction of genetic and epigenetic factors with ALS, we further generated the genetic-profile scores 
 (the weighted sum of the effect allele count) based on summary statistics from an EU-ALS cohort (derived from a genome-wide association study (GWAS) 
 based on large European population cohorts consisting of 20,806 ALS cases and 59,804 controls; Access link:http://als.umassmed.edu; reference research: https://doi.org/10.1016/j.neuron.2018.02.027).
