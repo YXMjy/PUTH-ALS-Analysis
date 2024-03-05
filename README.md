@@ -1,4 +1,4 @@
-# Integrated multi-omics analysis identifies novel risk loci for amyotrophic lateral sclerosis in the Chinese population
+# PUTH-ALS-Analysis 
 
 *** This is a series of codes on an epigenome-wide association study of ALS cases in the Chinese population. 
 
