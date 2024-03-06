@@ -1,5 +1,4 @@
-####################### volcano plot ##########################################################
-rm(list = ls())
+####################### volcano plot--Figure3B ##########################################################
 
 #install.package
 #install.packages("ggpubr")
@@ -27,7 +26,7 @@ axisSetting <- theme(  # remove grid line
 )
 
 # load.data
-load("D:/Desktop/ALS_202306/ALS_analysis_202306/Fig2_DMP/DMP_all.Rdata")
+load("DMP_all.Rdata")
 vol_data<-myDMP_all$control_to_case
 vol_data$p.chisq<-pchisq(vol_data$t^2/2.134,df=1,lower.tail = FALSE)
 vol_data$adj.p.chisq<-vol_data$p.chisq*302052
@@ -52,8 +51,6 @@ vol_data$label[vol_data$gene=="USP53"&vol_data$p.chisq==3.700688e-09]="USP53"
 vol_data$label[vol_data$gene=="KDM5A"&vol_data$p.chisq==5.220846e-09]="KDM5A"
 
 vol_data$logP<-(-log10(vol_data$p.chisq))
-ggscatter(vol_data,x="deltaBeta",y="logP",
-          ggtheme =  theme_bw())
 
 p<-ggscatter(vol_data,x="deltaBeta",y="logP",
           color = "Group",
@@ -71,4 +68,4 @@ p<-ggscatter(vol_data,x="deltaBeta",y="logP",
   geom_vline(xintercept = 0,linetype="dashed")+
   axisSetting
 p
-ggsave("D:/Desktop/ALS_202306/ALS_analysis_202306/Fig2_DMP/volcano_plot-new.tiff", plot = p, width = 4.8, height = 6, units = "in", dpi = 300)
+
