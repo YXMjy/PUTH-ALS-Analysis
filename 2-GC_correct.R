@@ -1,5 +1,4 @@
 getwd()
-setwd("D:/Desktop/ALS_202306/ALS_analysis_202306/Fig2_DMP")
 
 library(ggplot2)
 axisSetting <- theme(  # remove grid line
@@ -61,7 +60,6 @@ gc
 summary(data$P.Value)
 hist(data$P.Value,
      breaks = seq(0, 1, 0.05),
-   #  main = "P-Value Distribution", 
      xlab = "P-Value", 
      ylab = "Frequency", 
      col = "skyblue", 
@@ -89,7 +87,6 @@ gc
 summary(data$p.chisq)
 hist(data$p.chisq,
      breaks = seq(0, 1, 0.05),
-     #  main = "P-Value Distribution", 
      xlab = "P-Value", 
      ylab = "Frequency", 
      col = "skyblue", 
@@ -161,7 +158,6 @@ gc
 summary(data$P.Value)
 hist(data$P.Value,
      breaks = seq(0, 1, 0.05),
-     #  main = "P-Value Distribution", 
      xlab = "P-Value", 
      ylab = "Frequency", 
      col = "skyblue", 
@@ -190,7 +186,6 @@ gc
 summary(data$p.chisq)
 hist(data$p.chisq,
      breaks = seq(0, 1, 0.025),
-     #  main = "P-Value Distribution", 
      xlab = "P-Value", 
      ylab = "Frequency", 
      col = "#FFDD55", 
@@ -263,7 +258,6 @@ gc #1.718525
 summary(data$P.Value)
 hist(data$P.Value,
      breaks = seq(0, 1, 0.05),
-     #  main = "P-Value Distribution", 
      xlab = "P-Value", 
      ylab = "Frequency", 
      col = "skyblue", 
@@ -292,7 +286,6 @@ gc #1.001023
 summary(data$p.chisq)
 hist(data$p.chisq,
      breaks = seq(0, 1, 0.025),
-     #  main = "P-Value Distribution", 
      xlab = "P-Value", 
      ylab = "Frequency", 
      col = "#66CDAA", 
@@ -366,7 +359,6 @@ gc #1.87871
 summary(data$P.Value)
 hist(data$P.Value,
      breaks = seq(0, 1, 0.05),
-     #  main = "P-Value Distribution", 
      xlab = "P-Value", 
      ylab = "Frequency", 
      col = "skyblue", 
@@ -395,7 +387,6 @@ gc #1.001023
 summary(data$p.chisq)
 hist(data$p.chisq,
      breaks = seq(0, 1, 0.025),
-     #  main = "P-Value Distribution", 
      xlab = "P-Value", 
      ylab = "Frequency", 
      col = "#9370DB", 
@@ -440,7 +431,6 @@ ha1<-t(tmp_lm_Ha)
 ha2<-data.frame(ha1[,c("cg26515084","cg16209303","cg16125874","cg08296288","cg14338936")])
 ha2$X<-rownames(ha2)
 ha3<-merge(ha2,pd,by="X",all=T)
-write.csv(ha3,"D:/Desktop/ALS_202306/ALS_analysis_202306/Fig2_DMP/im_genes/imgenes_ha.csv")
 
 ## plot
 library(patchwork)
@@ -497,14 +487,6 @@ p5<-ggplot(data=data,aes(x=cg08296288,fill=Group))+
 p5
 
 
-ggsave("D:/Desktop/ALS_202306/ALS_analysis_202306/Fig2_DMP/im_genes/density-ha-ankle2.tiff", plot = p1, width = 3, height = 3, units = "in", dpi = 300)
-ggsave("D:/Desktop/ALS_202306/ALS_analysis_202306/Fig2_DMP/im_genes/density-ha-ssh2.tiff", plot = p2, width = 3, height = 3, units = "in", dpi = 300)
-ggsave("D:/Desktop/ALS_202306/ALS_analysis_202306/Fig2_DMP/im_genes/density-ha-cdc42.tiff", plot = p3, width = 3, height = 3, units = "in", dpi = 300)
-ggsave("D:/Desktop/ALS_202306/ALS_analysis_202306/Fig2_DMP/im_genes/density-ha-clec14.tiff", plot = p4, width = 3, height = 3, units = "in", dpi = 300)
-ggsave("D:/Desktop/ALS_202306/ALS_analysis_202306/Fig2_DMP/im_genes/density-ha-elavl3.tiff", plot = p5, width = 3, height = 3, units = "in", dpi = 300)
-
-
-
 
 
 
@@ -516,7 +498,6 @@ ho1<-t(tmp_lm_Ho)
 ho2<-data.frame(ho1[,c("cg26515084","cg16209303","cg16125874","cg08296288","cg14338936")])
 ho2$X<-rownames(ho2)
 ho3<-merge(ho2,pd,by="X",all=T)
-write.csv(ho3,"D:/Desktop/ALS_202306/ALS_analysis_202306/Fig2_DMP/im_genes/imgenes_ho.csv")
 
 ## plot
 data<-ho3
@@ -560,7 +541,6 @@ p4
 
 
 #ELAVL3-cg08296288
-
 p5<-ggplot(data=data,aes(x=cg08296288,fill=Group))+
   geom_histogram(binwidth = 0.02,color='white',mapping=aes(y=..density..))+
   scale_x_continuous( limits=c(0.3, 1.0))+
@@ -568,14 +548,6 @@ p5<-ggplot(data=data,aes(x=cg08296288,fill=Group))+
   labs(x=NULL)+
   axisSetting
 p5
-
-
-ggsave("D:/Desktop/ALS_202306/ALS_analysis_202306/Fig2_DMP/im_genes/density-ho-ankle2.tiff", plot = p1, width = 3, height = 3, units = "in", dpi = 300)
-ggsave("D:/Desktop/ALS_202306/ALS_analysis_202306/Fig2_DMP/im_genes/density-ho-ssh2.tiff", plot = p2, width = 3, height = 3, units = "in", dpi = 300)
-ggsave("D:/Desktop/ALS_202306/ALS_analysis_202306/Fig2_DMP/im_genes/density-ho-cdc42.tiff", plot = p3, width = 3, height = 3, units = "in", dpi = 300)
-ggsave("D:/Desktop/ALS_202306/ALS_analysis_202306/Fig2_DMP/im_genes/density-ho-clec14.tiff", plot = p4, width = 3, height = 3, units = "in", dpi = 300)
-ggsave("D:/Desktop/ALS_202306/ALS_analysis_202306/Fig2_DMP/im_genes/density-ho-elavl3.tiff", plot = p5, width = 3, height = 3, units = "in", dpi = 300)
-
 
 
 
@@ -588,7 +560,6 @@ ho21<-t(tmp_lm_Ho2)
 ho22<-data.frame(ho21[,c("cg26515084","cg16209303","cg16125874","cg08296288","cg14338936")])
 ho22$X<-rownames(ho22)
 ho23<-merge(ho22,pd,by="X",all=T)
-write.csv(ho23,"D:/Desktop/ALS_202306/ALS_analysis_202306/Fig2_DMP/im_genes/imgenes_ho2.csv")
 
 ## plot
 data<-ho23
@@ -632,7 +603,6 @@ p4
 
 
 #ELAVL3-cg08296288
-
 p5<-ggplot(data=data,aes(x=cg08296288,fill=Group))+
   geom_histogram(binwidth = 0.02,color='white',mapping=aes(y=..density..))+
   scale_x_continuous( limits=c(0.3, 1.0))+
@@ -640,14 +610,6 @@ p5<-ggplot(data=data,aes(x=cg08296288,fill=Group))+
   labs(x=NULL)+
   axisSetting
 p5
-
-
-ggsave("D:/Desktop/ALS_202306/ALS_analysis_202306/Fig2_DMP/im_genes/density-ho2-ankle2.tiff", plot = p1, width = 3, height = 3, units = "in", dpi = 300)
-ggsave("D:/Desktop/ALS_202306/ALS_analysis_202306/Fig2_DMP/im_genes/density-ho2-ssh2.tiff", plot = p2, width = 3, height = 3, units = "in", dpi = 300)
-ggsave("D:/Desktop/ALS_202306/ALS_analysis_202306/Fig2_DMP/im_genes/density-ho2-cdc42.tiff", plot = p3, width = 3, height = 3, units = "in", dpi = 300)
-ggsave("D:/Desktop/ALS_202306/ALS_analysis_202306/Fig2_DMP/im_genes/density-ho2-clec14.tiff", plot = p4, width = 3, height = 3, units = "in", dpi = 300)
-ggsave("D:/Desktop/ALS_202306/ALS_analysis_202306/Fig2_DMP/im_genes/density-ho2-elavl3.tiff", plot = p5, width = 3, height = 3, units = "in", dpi = 300)
-
 
 
 
@@ -660,7 +622,6 @@ l1<-t(tmp_lm_L)
 l2<-data.frame(l1[,c("cg26515084","cg16209303","cg16125874","cg08296288","cg14338936")])
 l2$X<-rownames(l2)
 l3<-merge(l2,pd,by="X",all=T)
-write.csv(l3,"D:/Desktop/ALS_202306/ALS_analysis_202306/Fig2_DMP/im_genes/imgenes_l.csv")
 
 ## plot
 data<-l3
@@ -704,7 +665,6 @@ p4
 
 
 #ELAVL3-cg08296288
-
 p5<-ggplot(data=data,aes(x=cg08296288,fill=Group))+
   geom_histogram(binwidth = 0.02,color="white",mapping=aes(y=..density..))+
   scale_x_continuous( limits=c(0.3, 1.0))+
@@ -713,8 +673,3 @@ p5<-ggplot(data=data,aes(x=cg08296288,fill=Group))+
   axisSetting
 p5
 
-ggsave("D:/Desktop/ALS_202306/ALS_analysis_202306/Fig2_DMP/im_genes/density-l-ankle2.tiff", plot = p1, width = 3, height = 3, units = "in", dpi = 300)
-ggsave("D:/Desktop/ALS_202306/ALS_analysis_202306/Fig2_DMP/im_genes/density-l-ssh2.tiff", plot = p2, width = 3, height = 3, units = "in", dpi = 300)
-ggsave("D:/Desktop/ALS_202306/ALS_analysis_202306/Fig2_DMP/im_genes/density-l-cdc42.tiff", plot = p3, width = 3, height = 3, units = "in", dpi = 300)
-ggsave("D:/Desktop/ALS_202306/ALS_analysis_202306/Fig2_DMP/im_genes/density-l-clec14.tiff", plot = p4, width = 3, height = 3, units = "in", dpi = 300)
-ggsave("D:/Desktop/ALS_202306/ALS_analysis_202306/Fig2_DMP/im_genes/density-l-elavl3.tiff", plot = p5, width = 3, height = 3, units = "in", dpi = 300)
