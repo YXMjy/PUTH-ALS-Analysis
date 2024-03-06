@@ -1,13 +1,13 @@
 
-# GWAS summary is from EU-ALS cohort consisting of 20,804 individuals;http://als.umassmed.edu/
+# GWAS summary is from EU-ALS cohort consisting of 20,804 ALS cases;http://als.umassmed.edu/
 # reference:Genome-wide Analyses Identify KIF5A as a Novel ALS Gene;https://doi.org/10.1016/j.neuron.2018.02.027
 
 library(data.table)
-info=fread("D:/Desktop/ALS_202306/ALS_analysis_202306/Fig5_prs/PRS/plink/alsMetaSummaryStats_march21st2018.tab",data.table = F ) #EU-ALS
+info=fread("alsMetaSummaryStats_march21st2018.tab",data.table = F ) #EU-ALS
 head(info)
 
 dim(info)
-read.table("D:/Desktop/ALS_202306/ALS_analysis_202306/Fig5_prs/PRS/plink/Als_Methy_impute.bim", header = F) -> bim #PUTH-ALS
+read.table("Als_Methy_impute.bim", header = F) -> bim #PUTH-ALS
 head(bim)
 bim$SNP <- paste0(bim$V1, ":", bim$V4)
 length(which(bim$SNP %in% info$SNP))
