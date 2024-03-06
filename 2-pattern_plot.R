@@ -5,7 +5,7 @@ library(ggthemes)
 library("dplyr")
 library("scales")
 
-dat=read_excel("D:/Desktop/ALS_202306/ALS_analysis_202306/Fig2_DMP/DMP_Ha_2710.xlsx",sheet = "pattern") 
+dat=read_excel("DMP_Ha_2710.xlsx",sheet = "pattern") 
 
 axisSetting <- theme(  # remove grid line
   panel.background = element_rect(fill = "transparent",colour = NA), 
@@ -48,7 +48,6 @@ gene_reg$Freq.sum[gene_reg$Var2=="hypermethylated"]<-2416
 gene_reg$Freq.sum[gene_reg$Var2=="hypomethylated"]<-294
 gene_reg<- within(gene_reg,{rate <- round(Freq/Freq.sum,digits=4)*100})
 gene_reg<- subset(gene_reg,select=c(Var1,Var2,rate))
-write.csv(gene_reg,"D:/Desktop/ALS_202308/Fig_Tab/pattern/pattern_gene.reg.csv")
 
 ggplot(data=gene_reg, aes(x=Var1,y=rate))+
   geom_bar(stat="identity",aes(fill=Var2),width=0.5,position='stack')+
