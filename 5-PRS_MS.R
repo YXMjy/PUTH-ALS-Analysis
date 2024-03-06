@@ -1,4 +1,3 @@
-rm(list = ls())
 
 ####load packages###############################################
 library(r2redux)
@@ -30,7 +29,7 @@ axisSetting <- theme(  # remove grid line
 )
 
 ############ PRS_liner ###################################################
-pp<-read.csv("D:/Desktop/ALS_202308/Fig_Tab/prs/old_all.data/pp.csv")
+pp<-read.csv("pp.csv")
 
 #all data
 ppp<-pp[30:39]
@@ -49,7 +48,7 @@ for (i in 1:9) {
   result[i,3] <- R2l
   result[i,4] <- R2O
 }
-write.csv(result,"D:/Desktop/ALS_202308/Fig_Tab/prs/new_test.data/R2_prs_all.csv")
+write.csv(result,"R2_prs_all.csv")
 
 #North_liner
 North<-subset(pp,PC1<0,select = s1:outcome)
@@ -68,7 +67,7 @@ for (i in 1:9) {
   result.n[i,3] <- R2l
   result.n[i,4] <- R2O
 }
-write.csv(result.n,"D:/Desktop/ALS_202308/Fig_Tab/prs/new_test.data/R2_prs_n.csv")
+write.csv(result.n,"R2_prs_n.csv")
 
 #South_liner
 South<-subset(pp,PC1>0,select = s1:outcome)
@@ -87,14 +86,14 @@ for (i in 1:9) {
   result.s[i,3] <- R2l
   result.s[i,4] <- R2O
 }
-write.csv(result.s,"D:/Desktop/ALS_202308/Fig_Tab/prs/new_test.data/R2_prs_s.csv")
+write.csv(result.s,"R2_prs_s.csv")
 
 
 #### MS&PRS liner model ############################################################
 
 ## all data
-pm<-read.csv("D:/Desktop/ALS_202308/Fig_Tab/prs/cv.test.data/calibration/cv.lasso_pms_data.csv")
-pm<-read.csv("D:/Desktop/ALS_202308/Fig_Tab/prs/cv.test.data/calibration/cv.xgb_pms_data.csv")
+pm<-read.csv("lasso_pms_data.csv")
+pm<-read.csv("xgb_pms_data.csv")
 pms<-pm[c("ID","Group","s5","outcome","y_test","pla.value")]
 pms<-rename(pms,y_pred=pla.value)
 
@@ -124,60 +123,56 @@ cc_trf(rsq4, se4, 1/100000, 474/672)
 #North##################
 North<-subset(pm,PC1<0,select = c("ID","Group","s5","outcome","y_test","pla.value"))
 North<-rename(North,y_pred=pla.value)
-write.csv(North,"D:/Desktop/ALS_202308/Fig_Tab/prs/cv.test.data/cv.xgb_North.csv")
-North<-read.csv("D:/Desktop/ALS_202308/Fig_Tab/prs/new_test.data/North.csv")
 table(North$Group)
 
 #MS
 lm2<- lm(outcome ~ y_pred, data = North)
 summary(lm2)
-rsq2<-summary(lm2)$r.squared #Multiple R-squared:0.4575(xgb);0.2854(lasso)
+rsq2<-summary(lm2)$r.squared 
 se2 <- sqrt((1 - rsq2) / (467 - 2))
-cc_trf(rsq2, se2, 1/100000, 354/467)#$R2l:0.1965024,R2O: 0.7159485(xgb);0.1006255,0.5698231(lasso)
+cc_trf(rsq2, se2, 1/100000, 354/467)
 
 #MS+PRS
 lm3<- lm(outcome ~ s5+y_pred, data = North)
 summary(lm3)
-rsq3<-summary(lm3)$r.squared #Multiple R-squared:0.4607;0.2915
+rsq3<-summary(lm3)$r.squared 
 se3 <- sqrt((1 - rsq3) / (467 - 3))
-cc_trf(rsq3, se3, 1/100000, 354/467)#$R2l:0.1986798,R2O: 0.7180665(xgb);0.103421,0.5763397
+cc_trf(rsq3, se3, 1/100000, 354/467)
 
 #MS+PRS+MS*PRS
 lm4<- lm(outcome ~ s5+y_pred+s5*y_pred, data = North)
 summary(lm4)
-rsq4<-summary(lm4)$r.squared #Multiple R-squared:0.4607;0.2922
+rsq4<-summary(lm4)
 se4 <- sqrt((1 - rsq4) / (467 - 4))
-cc_trf(rsq4, se4, 1/100000, 354/467)#$R2l: 0.1986964;R2O:0.7180826;0.1037573,0.5771098
+cc_trf(rsq4, se4, 1/100000, 354/467)
 
 
 
 #South###############
 South<-subset(pm,PC1>0,select = c("ID","Group","s5","outcome","y_test","pla.value"))
 South<-rename(South,y_pred=pla.value)
-write.csv(South,"D:/Desktop/ALS_202308/Fig_Tab/prs/cv.test.data/cv.xgb_South.csv")
-South<-read.csv("D:/Desktop/ALS_202308/Fig_Tab/prs/new_test.data/South.csv")
+
 
 #MS
 lm2<- lm(outcome ~ y_pred, data = South)
 summary(lm2)
-rsq2<-summary(lm2)$r.squared #Multiple R-squared:0.4228(xgb);0.3345(lasso);(cal.lasso)
+rsq2<-summary(lm2)$r.squared
 se2 <- sqrt((1 - rsq2) / (205 - 2))
-cc_trf(rsq2, se2, 1/100000, 120/205)#$R2l:0.1387497;R2O: 0.729595;0.09759146,0.6671766
+cc_trf(rsq2, se2, 1/100000, 120/205)
 
 #MS+PRS
 lm3<- lm(outcome ~ s5+y_pred, data = South)
 summary(lm3)
-rsq3<-summary(lm3)$r.squared #Multiple R-squared:0.4229;0.3367
+rsq3<-summary(lm3)$r.squared 
 se3 <- sqrt((1 - rsq3) / (205 - 3))
-cc_trf(rsq3, se3, 1/100000, 120/205)#$R2l:0.1387813;R2O: 0.7296318;0.09850589,0.6689676
+cc_trf(rsq3, se3, 1/100000, 120/205)
 
 #MS+PRS+MS*PRS
 lm4<- lm(outcome ~ s5+y_pred+s5*y_pred, data = South)
 summary(lm4)
-rsq4<-summary(lm4)$r.squared #Multiple R-squared:0.4244;0.3379
+rsq4<-summary(lm4)$r.squared 
 se4 <- sqrt((1 - rsq4) / (205 - 4))
-cc_trf(rsq4, se4, 1/100000, 120/205)#$R2l:0.1396072;R2O: 0.7305905;0.09899499,0.6699159
-
+cc_trf(rsq4, se4, 1/100000, 120/205)
 
 
 
@@ -186,7 +181,7 @@ cc_trf(rsq4, se4, 1/100000, 120/205)#$R2l:0.1396072;R2O: 0.7305905;0.09899499,0.
 ################################### plot ########################################
 
 ##### barplot1--Figure5F ########
-dat1=read_excel("D:/Desktop/ALS_202308/Fig_Tab/prs/new_test.data/R2_plot.xlsx",sheet = "R2_prs") 
+dat1=read_excel("R2_plot.xlsx",sheet = "R2_prs") 
 
 barplot1<-ggplot(data=dat1,aes(x=Group,y=R2l,fill=pT))+
   stat_summary(geom = "bar",fun = "mean",
@@ -205,7 +200,7 @@ barplot1
 
 
 ##### barplot2--Figure5G ######
-dat2=read_excel("D:/Desktop/ALS_202308/Fig_Tab/prs/cv.test.data/R2_plot.xlsx",sheet = "R2_pms") 
+dat2=read_excel("R2_plot.xlsx",sheet = "R2_pms") 
 barplot2<-ggplot(data=dat2,aes(x=Group,
                                y=R2l.xgb.calib,
                                fill=model))+
@@ -223,16 +218,13 @@ barplot2<-ggplot(data=dat2,aes(x=Group,
   name="")+
   labs(x="Cohort",y="Variance explained (adjusted R2)")+axisSetting
 barplot2
-ggplot(dat2, aes(x=Group,y=R2l.xgb,fill=model)) +
-  geom_bar(position = "dodge", color = "transparent", stat = "identity") +
-  labs(title = "Grouped Barplot without Border Lines")
 
 
 
 
 #### density plot--Figure5C-D #######
-cv.xgb<-read.csv("D:/Desktop/ALS_202308/Fig_Tab/prs/cv.test.data/cv.xgb_pms_data.csv")
-cv.lasso<-read.csv("D:/Desktop/ALS_202308/Fig_Tab/prs/cv.test.data/cv.lasso_pms_data.csv")
+cv.xgb<-read.csv("xgb_pms_data.csv")
+cv.lasso<-read.csv("lasso_pms_data.csv")
 
 #LASSO
 cv.lasso$Group[cv.lasso$y_test==1]<-"case"
@@ -261,7 +253,7 @@ plot.xgb.pla
 
 
 ##### decile plot--Figure5E ###########
-dat3<-read_excel("D:/Desktop/ALS_202308/Fig_Tab/prs/cv.test.data/calibration/quantile_plot_calib.xlsx",sheet = "plot")
+dat3<-read_excel("quantile_plot_calib.xlsx",sheet = "plot")
 dat3$decile<-as.factor(dat3$decile)
 barplot3<-ggplot(data=dat3,aes(x=decile,y=`Odds`,fill=model))+
   stat_summary(geom = "bar",fun = "mean",
