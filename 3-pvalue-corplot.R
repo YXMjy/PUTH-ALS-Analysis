@@ -21,10 +21,10 @@ axisSetting <- theme(  # remove grid line
 )
 
 #### corplot--Figure3 C-E ###########
-load("D:/Desktop/ALS_202306/ALS_analysis_202306/Fig2_DMP/DMP_Ha_2710.Rdata")
+load("DMP_Ha_2710.Rdata")
 indata<-myDMP_Ha$control_to_case
 indata<-vol_data[,c("gene","logP")]
-outdata<-read.csv("D:/Desktop/ALS_202306/ALS_analysis_202306/Fig6_gene validation/gene_exp/impgene_out.csv")
+outdata<-read.csv("impgene_out.csv")
 outdata<-rename(outdata,gene=symbol)
 outdata<-outdata[,c("gene","log_p")]
 data<-merge(indata,outdata,by='gene')
@@ -59,7 +59,6 @@ plot <- plot + xlab("-log10(p-value)(PUTH cohort)") +
   geom_hline(yintercept = 5.77, linetype = "dashed", color = "gray") +  
   geom_vline(xintercept = 6.78, linetype = "dashed", color = "gray")   
 plot
-ggsave("D:/Desktop/ALS_202306/ALS_analysis_202306/Fig6_gene validation/pvalue_plot3.tiff", plot = plot, width = 8, height = 6, units = "in", dpi = 300)
 
 
 
@@ -67,7 +66,7 @@ ggsave("D:/Desktop/ALS_202306/ALS_analysis_202306/Fig6_gene validation/pvalue_pl
 ########### Hannum #############################
 
 ## meth data
-load("D:/Desktop/ALS_202306/ALS_analysis_202306/Fig2_DMP/DMP_all.Rdata")
+load("DMP_all.Rdata")
 ha1<-myDMP_all$control_to_case
 ha1$p.chisq<-pchisq(ha1$t^2/2.134,df=1,lower.tail = FALSE)
 
@@ -75,10 +74,9 @@ ha2<-ha1[,c("t","P.Value","adj.P.Val","control_AVG","case_AVG","deltaBeta","gene
 ha2$group.pu<-NA
 ha2$group.pu[which(ha2$deltaBeta>0)]="hyper"
 ha2$group.pu[which(ha2$deltaBeta<0)]="hypo"
-remove(myDMP_all)
 
 ## gene data
-outdata<-read_excel("D:/Desktop/ALS_202306/ALS_analysis_202306/Fig6_gene validation/gene_exp/impgene_out.xlsx",sheet="Sheet2")
+outdata<-read_excel("impgene_out.xlsx",sheet="Sheet2")
 outdata2<-na.omit(outdata)
 outdata2$deltaExp<-outdata2$case_mean-outdata2$control_mean
 outdata2$group.ny<-NA
@@ -125,7 +123,7 @@ a4$p.value
 ########### Horvath #############################
 
 ## meth data
-load("D:/Desktop/ALS_202306/ALS_analysis_202306/Fig2_DMP/DMP_all_Ho.Rdata")
+load("DMP_all_Ho.Rdata")
 ho1<-myDMP_all_Ho$control_to_case
 ho1$p.chisq<-pchisq(ho1$t^2/2.619,df=1,lower.tail = FALSE)
 
@@ -189,7 +187,7 @@ a4$p.value
 ########### Horvath2 #############################
 
 ## meth data
-load("D:/Desktop/ALS_202306/ALS_analysis_202306/Fig2_DMP/DMP_all_Ho2.Rdata")
+load("DMP_all_Ho2.Rdata")
 ho2.1<-myDMP_all_Ho2$control_to_case
 ho2.1$p.chisq<-pchisq(ho2.1$t^2/1.719,df=1,lower.tail = FALSE)
 
@@ -246,7 +244,7 @@ a4$p.value
 ########### Levine2 #############################
 
 ## meth data
-load("D:/Desktop/ALS_202306/ALS_analysis_202306/Fig2_DMP/DMP_all_L.Rdata")
+load("DMP_all_L.Rdata")
 l1<-myDMP_all_L$control_to_case
 l1$p.chisq<-pchisq(l1$t^2/1.879,df=1,lower.tail = FALSE)
 
@@ -302,7 +300,7 @@ a4$p.value #0.67
 
 ######## barplot--Figure2 M-N ################################################################
 
-dat1=read_excel("D:/Desktop/ALS_202306/ALS_analysis_202306/Fig6_gene validation/cor_exp_M&G/bar_exp_M&G_ha.xlsx",sheet = "Sheet1") 
+dat1=read_excel("bar_exp_M&G_ha.xlsx",sheet = "Sheet1") 
 
 #total
 barplot1<-ggplot(data=dat1,aes(x=status,y=total,fill=Group))+
@@ -318,7 +316,6 @@ barplot1<-ggplot(data=dat1,aes(x=status,y=total,fill=Group))+
   name="")+
   labs(y="Number")+axisSetting
 barplot1
-ggsave("D:/Desktop/ALS_202306/ALS_analysis_202306/Fig6_gene validation/cor_exp_M&G/bar_exp_total.tiff", plot = barplot1, width = 4.5, height = 4, units = "in", dpi = 300)
 
 #both 0.05/adjust 0.05
 barplot3<-ggplot(data=dat1,aes(x=status,y=`adjust p<0.05`,fill=Group))+
@@ -334,4 +331,4 @@ barplot3<-ggplot(data=dat1,aes(x=status,y=`adjust p<0.05`,fill=Group))+
   name="")+
   labs(y="Number")+axisSetting
 barplot3
-ggsave("D:/Desktop/ALS_202306/ALS_analysis_202306/Fig6_gene validation/cor_exp_M&G/bar_exp_adj0.05.tiff", plot = barplot3, width = 4.5, height = 4, units = "in", dpi = 300)
+
