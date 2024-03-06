@@ -6,7 +6,7 @@ library(caret)
 library(ROCR)
 
 set.seed(123)
-load("D:/Students/2021yaoxm/validation/seed123_300th/data.Rdata")
+load("data.Rdata")
 
 #################################lasso###############################################
 # run 100 times
@@ -62,11 +62,11 @@ for (i in 1:10) {
 }
 
 ####save result
- write.csv(aucs,"D:/Students/2021yaoxm/validation/seed123_300th/lasso_no.ankle2/aucs123.csv")
- save(pred_tr,file="D:/Students/2021yaoxm/validation/seed123_300th/lasso_new100/pred.train.Rdata")
- save(pred_te,file="D:/Students/2021yaoxm/validation/seed123_300th/lasso_no.ankle2/pred.test.Rdata")
- save(pred_all,file="D:/Students/2021yaoxm/validation/seed123_300th/lasso_new100/pred.all.Rdata")
- save(genes,file ="D:/Students/2021yaoxm/validation/seed123_300th/lasso_no.ankle2/genes.Rdata" )
+ write.csv(aucs,"aucs123.csv")
+ save(pred_tr,file="pred.train.Rdata")
+ save(pred_te,file="pred.test.Rdata")
+ save(pred_all,file="pred.all.Rdata")
+ save(genes,file ="genes.Rdata" )
  
  
  
@@ -81,7 +81,7 @@ for (i in 1:10) {
  aucs=data.frame(train.lower=NA,train.auc=NA,train.upper=NA,
                  test.lower=NA,test.auc=NA,test.upper=NA,
                  all.lower=NA,all.auc=NA,all.upper=NA)
-for (i in 1:50) {
+for (i in 1:100) {
   train_index <- sample(1:nrow(data), nrow(data) * 2 / 3)
   train_data <- data[train_index, ]
   
@@ -127,8 +127,8 @@ for (i in 1:50) {
 }
 
 #save result
-write.csv(aucs,"D:/Students/2021yaoxm/validation/seed123_300th/xgb_new50/aucs123.csv")
-save(pred_tr,file="D:/Students/2021yaoxm/validation/seed123_300th/xgb_new50/pred.train.Rdata")
-save(pred_te,file="D:/Students/2021yaoxm/validation/seed123_300th/xgb_new50/pred.test.Rdata")
-save(pred_all,file="D:/Students/2021yaoxm/validation/seed123_300th/xgb_new50/pred.all.Rdata")
-save(imp,file="D:/Students/2021yaoxm/validation/seed123_300th/xgb_new50/genes.Rdata")
+write.csv(aucs,"aucs123.csv")
+save(pred_tr,file="pred.train.Rdata")
+save(pred_te,file="pred.test.Rdata")
+save(pred_all,file="pred.all.Rdata")
+save(imp,file="genes.Rdata")
