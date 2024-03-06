@@ -1,7 +1,5 @@
-rm(list = ls())
-
 ## load data
-load("D:/Desktop/ALS_analysis_202306/Fig3_survival/sur_data.Rdata")
+load("sur_data.Rdata")
 
 ## scale
 sur_data_scale<-as.data.frame(scale(sur_data[,(3:2719)]))
@@ -21,12 +19,12 @@ for(i in 1:2717){
   newdata[i,5]=scox2$coefficients[,"Pr(>|z|)"]
 }
 table(newdata$pvalue<0.05)
-write.csv(newdata,"D:/Desktop/ALS_analysis_202306/Fig3_survival/unicox_2710.csv")
+write.csv(newdata,"unicox_2710.csv")
 
 #### cox-mulmodel ####
 
 sdmultiCox=coxph(Surv(month) ~ Sex+age+cg06102777+cg09429700+cg27443844+cg15554338+
-                           cg09664186+cg13116071+cg19716038+cg15685223+cg16412370+cg01371004, data = sur_data_scale) #这里有个“.”，代表分析td数据中所有变量（列名）
+                           cg09664186+cg13116071+cg19716038+cg15685223+cg16412370+cg01371004, data = sur_data_scale) 
 sur_result<-broom::tidy(sdmultiCox,exponentiate=T,conf.int=T)
 tdmultiCoxSum=summary(sdmultiCox)
 outResult=data.frame()
@@ -36,7 +34,7 @@ outResult=cbind(
   H95CIH=tdmultiCoxSum$conf.int[,"upper .95"],
   pvalue=tdmultiCoxSum$coefficients[,"Pr(>|z|)"])
 outResult=cbind(id=row.names(outResult),outResult)
-write.csv(outResult,"D:/Desktop/ALS_analysis_202306/Fig3_survival/mulcox_2710.csv")
+write.csv(outResult,"mulcox_2710.csv")
 
 
 #### kaplan-meier--Figure4A-D ####
@@ -58,7 +56,7 @@ ggsurvplot(fit, data = sur_data,
 ##### forest_plot--Figure4E-F #####
 library(readxl)
 library(ggplot2)
-dat=read_excel("D:/Desktop/ALS_analysis_202306/Fig3_survival/forest_plot.xlsx",sheet="mul")
+dat=read_excel("forest_plot.xlsx",sheet="mul")
 
 axisSetting <- theme(  # remove grid line
   panel.background = element_rect(fill = "transparent",colour = NA), 
