@@ -18,7 +18,7 @@ axisSetting <- theme(  # remove grid line
 
 
 # go_up&down
-data<-read_excel("D:/Desktop/ALS_202308/Fig_Tab/pattern/GO_2710up_down.xlsx",sheet = "sheet1")
+data<-read_excel("GO_2710up_down.xlsx",sheet = "sheet1")
 
 ggplot(data,aes(reorder(Description, Ratio),Ratio,fill=ONTOLOGY))+
   geom_col()+
@@ -51,7 +51,7 @@ ggplot(data,aes(reorder(Description, Ratio),Ratio,fill=ONTOLOGY))+
 
 
 #all
-data<-read.csv("D:/Desktop/ALS_202308/Fig_Tab/pattern/GO_2710all.csv")
+data<-read.csv("GO_2710all.csv")
 ggplot(data=data, aes(x=Description,y=Ratio, fill=ONTOLOGY)) + 
   geom_bar(stat="identity", width=0.8)
 Description_order=factor(as.integer(rownames(data)),labels=data$Description)
