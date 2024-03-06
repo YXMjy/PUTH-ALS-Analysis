@@ -1,4 +1,4 @@
-getwd()
+####Figure 2/Table S1
 
 library(ggplot2)
 axisSetting <- theme(  # remove grid line
