@@ -1,6 +1,6 @@
 
 rm(list = ls())
-setwd("D:/Desktop/ALS_202306/ALS_analysis_202306/Fig2_DMP")
+
 ################################ install.package_load.data #######################
 
 #### step1.1-install.package ####
@@ -30,13 +30,13 @@ require(GEOquery)
 require(Biobase)
 library("impute")
 library(data.table)
-info=fread("D:/Students/2021yaoxm/20230215/PD687_13.txt",data.table = F )
+info=fread("PD687_13.txt",data.table = F )
 b=info
 rownames(b)=b[,1]
 b=b[,-1]
 head(b)
 
-c=fread("D:/Students/2021yaoxm/20230215/data303.txt",data.table = F )
+c=fread("data303.txt",data.table = F )
 c=c[,-1]
 c[1:4,1:4]
 rownames(c)=c[,1]
@@ -99,7 +99,7 @@ save(myNorm,pD,file = 'step2-champ_myNorm.Rdata')
 
 
 #### step2.3-SVD(check effect of confounding factors) ####
-setwd("D:/Desktop/ALS_202306/ALS_analysis_202306/Fig2_DMP")
+
 load(file = 'step2-champ_myNorm.Rdata')
 
 pd0_689$region[pd0_689$PC1<0]<-'1'
