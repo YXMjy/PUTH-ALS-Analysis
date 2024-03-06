@@ -1,4 +1,4 @@
-rm(list = ls())
+####Figure 5A-B
 
 library(pROC)
 library(caret)
@@ -8,7 +8,7 @@ library(dplyr)
 ##lasso
 
 # input data
-load('D:/Students/2021yaoxm/validation/seed123_300th/lasso_new100/pred.test.Rdata')
+load('lasso_new100/pred.test.Rdata')
 
 # 
 for (i in 1:length(pred_te)) {
@@ -41,7 +41,7 @@ legend("bottomright", legend = c("Individual ROC", "Average ROC"),
 
 #xgb
 # input data
-load('D:/Students/2021yaoxm/validation/seed123_300th/xgb_new100/pred.test.Rdata')
+load('xgb_new100/pred.test.Rdata')
 
 #
 for (i in 1:length(pred_te)) {
