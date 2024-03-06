@@ -24,7 +24,7 @@ axisSetting <- theme(  # remove grid line
   legend.key.width=unit(0.6,'cm'),
 )
 
-load("D:/Desktop/ALS_analysis_202306/Fig2_DMP/pd0_689.Rdata")
+load("pd0_689.Rdata")
 pd0_689$loc<-0
 pd0_689$loc[pd0_689$PC1<0]<-1#N
 pd0_689$loc[pd0_689$PC1>0]<-2#S
