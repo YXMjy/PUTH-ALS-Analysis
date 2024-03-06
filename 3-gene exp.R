@@ -1,7 +1,6 @@
-rm(list = ls())
-setwd("D:/Desktop/gene_exp")
 
-#############differential expression analysis ##################################
+
+#############differential expression analysis--Table2 ##################################
 
 ## load data
 # This cohort is from ALS Consortium of New York Genomic Center.
